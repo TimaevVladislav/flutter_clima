@@ -27,6 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     longitude = location.longitude;
     Networking networking = Networking(Uri.parse(
         "https://api.openweathermap.org/data/3.0/onecall?lat=$latitude&lon=$longitude&exclude=hourly,daily&appid=$apiKey"));
+    Future weather = await networking.getWeather();
   }
 
   @override

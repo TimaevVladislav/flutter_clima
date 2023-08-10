@@ -5,7 +5,7 @@ class Networking {
   Networking(this.url);
   Uri url = Uri();
 
-  Future getData() async {
+  Future getWeather() async {
     http.Response response = await http.get(url);
     String weather = response.body;
     return jsonDecode(weather);
