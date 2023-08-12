@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clima/screens/city.dart';
 import 'package:flutter_clima/services/weather.dart';
 import 'package:flutter_clima/utilities/constants.dart';
-import 'dart:convert';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({this.weather});
@@ -69,7 +69,21 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   FloatingActionButton(
                     heroTag: null,
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weather = await model.getWeatherLocation();
+                      var name = await Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CityScreen(
+                          weather: weather,
+                        );
+                      }));
+
+                      if (name) {
+                        var weather = await model.getCityWeather(name);
+                        city = name;
+                        updateWeather(weather);
+                      }
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
